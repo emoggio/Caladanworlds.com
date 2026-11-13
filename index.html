@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Caladan Worlds — Defence Technology</title>
+<meta name="description" content="Caladan Worlds is building a new class of defence technology. More soon.">
+<meta name="theme-color" content="#050b10">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Caladan Worlds — Defence Technology">
+<meta property="og:description" content="Uncertainty is the mission-killer. More soon.">
+<meta property="og:url" content="https://caladanworlds.com/">
+<link rel="canonical" href="https://caladanworlds.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050b10;
+    --text: #eaf2f4;
+    --soft: #b4c3c9;
+    --muted: #7f9199;
+    --threat: #ff7a1a;   /* orange: threats */
+    --clear: #6dff8e;    /* green: friendly assets and routes */
+    --grid: #8cd7e8;     /* cool blue: terrain and data */
+    --line: rgba(234, 242, 244, 0.16);
+    --gutter: clamp(20px, 5vw, 64px);
+    --sans: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+
+  html { background: var(--bg); }
+
+  body {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Background layers: colour wash, the tactical scene, out-of-focus lights, text scrim */
+  .wash, #scene, .bokeh, .scrim { position: fixed; inset: 0; pointer-events: none; }
+  .wash {
+    background:
+      radial-gradient(ellipse 80% 60% at 65% 62%, rgba(20, 62, 76, 0.55), transparent 70%),
+      linear-gradient(180deg, #04080c 0%, #06131a 100%);
+  }
+  #scene { width: 100%; height: 100%; opacity: 0; animation: fade 1.8s ease-out 0.1s forwards; }
+  .bokeh i {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(22px);
+    opacity: 0.5;
+  }
+  .bokeh i:nth-child(1) { width: 90px;  height: 90px;  left: -20px; bottom: -24px; background: var(--threat); opacity: 0.35; }
+  .bokeh i:nth-child(2) { width: 120px; height: 120px; left: 30%;   bottom: -60px; background: #6fc3d6; opacity: 0.3; }
+  .bokeh i:nth-child(3) { width: 80px;  height: 80px;  right: 6%;   bottom: -22px; background: var(--threat); opacity: 0.4; }
+  .bokeh i:nth-child(4) { width: 60px;  height: 60px;  right: 28%;  bottom: -30px; background: #6fc3d6; opacity: 0.28; }
+  .scrim {
+    background:
+      linear-gradient(90deg, rgba(5, 11, 16, 0.82) 0%, rgba(5, 11, 16, 0.45) 38%, transparent 62%),
+      linear-gradient(180deg, rgba(5, 11, 16, 0.7) 0%, transparent 22%);
+  }
+  @keyframes fade { to { opacity: 1; } }
+
+  header, main, footer { position: relative; z-index: 1; padding-inline: var(--gutter); }
+
+  .label {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-block: clamp(20px, 3vw, 32px);
+  }
+  .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+  .brand .mark { height: 32px; width: auto; display: block; }
+  .brand .word { height: 15px; width: auto; display: block; }
+
+  .status { display: flex; align-items: center; gap: 10px; white-space: nowrap; color: var(--soft); }
+  .status i {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--clear);
+    animation: ping 2.6s ease-out infinite;
+  }
+  @keyframes ping {
+    0%   { box-shadow: 0 0 0 0 rgba(109, 255, 142, 0.55); }
+    70%  { box-shadow: 0 0 0 9px rgba(109, 255, 142, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(109, 255, 142, 0); }
+  }
+
+  main {
+    padding-top: clamp(36px, 10vh, 130px);
+    padding-bottom: 48px;
+  }
+  .eyebrow { display: block; margin-bottom: clamp(18px, 3vh, 30px); color: var(--soft); }
+  .eyebrow b { color: var(--threat); font-weight: 600; }
+
+  h1 {
+    font-weight: 600;
+    font-size: clamp(2.3rem, 6.6vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    max-width: 13ch;
+    text-wrap: balance;
+  }
+  h1 em { font-style: normal; color: var(--threat); }
+
+  .lede {
+    margin-top: clamp(20px, 3.5vh, 34px);
+    max-width: 42ch;
+    font-size: clamp(1rem, 1.3vw, 1.18rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--soft);
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: clamp(26px, 4.5vh, 42px);
+    padding: 15px 24px;
+    border: 1px solid var(--line);
+    background: rgba(5, 11, 16, 0.6);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: var(--text);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+  }
+  .cta span { transition: transform 0.2s; }
+  .cta:hover, .cta:focus-visible {
+    border-color: var(--threat);
+    background: var(--threat);
+    color: #0a0704;
+  }
+  .cta:hover span, .cta:focus-visible span { transform: translateX(4px); }
+  a:focus-visible { outline: 2px solid var(--threat); outline-offset: 4px; }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: clamp(18px, 2.5vw, 28px);
+    padding-bottom: max(clamp(18px, 2.5vw, 28px), env(safe-area-inset-bottom));
+  }
+  footer .label { color: rgba(234, 242, 244, 0.66); text-shadow: 0 0 12px var(--bg), 0 0 4px var(--bg); }
+
+  /* Entrance */
+  .rise { opacity: 0; transform: translateY(14px); animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
+  .rise:nth-child(2) { animation-delay: 0.12s; }
+  .rise:nth-child(3) { animation-delay: 0.24s; }
+  .rise:nth-child(4) { animation-delay: 0.36s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  @media (max-width: 760px) {
+    .scrim { background: linear-gradient(180deg, rgba(5, 11, 16, 0.8) 0%, rgba(5, 11, 16, 0.5) 40%, transparent 62%); }
+    .soon { display: none; }
+    footer { flex-direction: column-reverse; gap: 8px; }
+  }
+  .hint .coarse { display: none; }
+  @media (pointer: coarse) {
+    .hint .fine { display: none; }
+    .hint .coarse { display: inline; }
+  }
+  @media (max-width: 520px) {
+    .status span { display: none; }
+    .brand .mark { height: 28px; }
+    .brand .word { height: 13px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise, #scene { animation: none; opacity: 1; transform: none; }
+    .status i { animation: none; }
+    .cta, .cta span { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wash" aria-hidden="true"></div>
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="scrim" aria-hidden="true"></div>
+
+  <header>
+    <a class="brand" href="/" aria-label="Caladan Worlds">
+      <img class="mark" src="assets/mark.svg" alt="" width="34" height="32">
+      <img class="word" src="assets/wordmark.svg" alt="Caladan Worlds" width="139" height="15">
+    </a>
+    <div class="status label"><i></i><span>In development</span></div>
+  </header>
+
+  <main>
+    <span class="label eyebrow rise"><b>//</b> Defence technology</span>
+    <h1 class="rise">Uncertainty is the <em>mission&#8209;killer.</em></h1>
+    <p class="lede rise">We’re building defence technology that faces it, sees through it, and leaves only clarity behind. Quietly, for now.</p>
+    <a class="cta rise" href="mailto:info@caladanworlds.com">Get in touch <span aria-hidden="true">→</span></a>
+  </main>
+
+  <footer>
+    <span class="label">© <span id="year">2026</span> Caladan Worlds</span>
+    <span class="label hint" aria-hidden="true"><span class="fine">Move to steer · Click to ping</span><span class="coarse">Touch to steer · Tap to ping</span></span>
+    <span class="label soon">More soon</span>
+  </footer>
+
+<script src="scene.js"></script>
+</body>
+</html>
