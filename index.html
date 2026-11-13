@@ -137,27 +137,36 @@
     align-items: center;
     gap: 14px;
     margin-top: clamp(26px, 4.5vh, 42px);
-    padding: 15px 24px;
-    border: 1px solid var(--line);
-    background: rgba(5, 11, 16, 0.6);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    color: var(--text);
-    font-size: 12.5px;
+    padding: 7px 7px 7px 26px;
+    border-radius: 999px;
+    background: var(--text);
+    color: #071015;
+    font-size: 15.5px;
     font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    letter-spacing: -0.01em;
     text-decoration: none;
-    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+    box-shadow: 0 10px 40px -12px rgba(140, 215, 232, 0.45);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
   }
-  .cta span { transition: transform 0.2s; }
+  .cta span {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #071015;
+    color: var(--text);
+    font-size: 17px;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+  }
   .cta:hover, .cta:focus-visible {
-    border-color: var(--threat);
-    background: var(--threat);
-    color: #0a0704;
+    background: #ffffff;
+    box-shadow: 0 12px 44px -10px rgba(255, 122, 26, 0.55);
+    transform: translateY(-1px);
   }
-  .cta:hover span, .cta:focus-visible span { transform: translateX(4px); }
+  .cta:hover span, .cta:focus-visible span { background: var(--threat); color: #0a0704; transform: rotate(-45deg); }
   a:focus-visible { outline: 2px solid var(--threat); outline-offset: 4px; }
+  .cta:focus-visible { outline-offset: 5px; }
 
   footer {
     display: flex;
@@ -213,7 +222,6 @@
   </header>
 
   <main>
-    <span class="label eyebrow rise"><b>//</b> Defence technology</span>
     <h1 class="rise">Uncertainty is the <em>mission&#8209;killer.</em></h1>
     <p class="lede rise">We’re building defence technology that faces it, sees through it, and leaves only clarity behind. Quietly, for now.</p>
     <a class="cta rise" href="mailto:info@caladanworlds.com">Get in touch <span aria-hidden="true">→</span></a>
