@@ -139,14 +139,14 @@
     margin-top: clamp(26px, 4.5vh, 42px);
     padding: 7px 7px 7px 26px;
     border-radius: 999px;
-    background: var(--text);
-    color: #071015;
+    border: 1px solid rgba(234, 242, 244, 0.38);
+    background: transparent;
+    color: var(--text);
     font-size: 15.5px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.01em;
     text-decoration: none;
-    box-shadow: 0 10px 40px -12px rgba(140, 215, 232, 0.45);
-    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
   }
   .cta span {
     display: grid;
@@ -154,14 +154,14 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #071015;
-    color: var(--text);
+    background: var(--text);
+    color: #071015;
     font-size: 17px;
     transition: background-color 0.2s, color 0.2s, transform 0.2s;
   }
   .cta:hover, .cta:focus-visible {
-    background: #ffffff;
-    box-shadow: 0 12px 44px -10px rgba(255, 122, 26, 0.55);
+    border-color: var(--threat);
+    background: rgba(255, 122, 26, 0.08);
     transform: translateY(-1px);
   }
   .cta:hover span, .cta:focus-visible span { background: var(--threat); color: #0a0704; transform: rotate(-45deg); }
