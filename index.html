@@ -12,6 +12,7 @@
 <meta property="og:url" content="https://caladanworlds.com/">
 <link rel="canonical" href="https://caladanworlds.com/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="12b0ba6a-77a3-4549-8d9c-d725d290573d"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&display=swap" rel="stylesheet">
@@ -235,7 +236,7 @@
   <main>
     <h1 class="rise">Uncertainty is the <em>mission&#8209;killer.</em></h1>
     <p class="lede rise">We’re building defence technology that faces it, sees through it, and leaves only clarity behind. Quietly, for now.</p>
-    <a class="cta rise" href="mailto:info@caladanworlds.com">Get in touch <span aria-hidden="true">→</span></a>
+    <a class="cta rise" href="mailto:info@caladanworlds.com" data-umami-event="Get in touch">Get in touch <span aria-hidden="true">→</span></a>
   </main>
 
   <footer>
@@ -245,5 +246,22 @@
   </footer>
 
 <script src="scene.js"></script>
+<script>
+  // Analytics: this is a one-page site, so time spent is recorded as markers
+  // (only seconds with the tab visible are counted).
+  (function () {
+    var marks = [[10, 'Stayed 10s'], [30, 'Stayed 30s'], [60, 'Stayed 1m'], [180, 'Stayed 3m']];
+    var seen = 0, next = 0;
+    var timer = setInterval(function () {
+      if (document.visibilityState !== 'visible') return;
+      seen++;
+      while (next < marks.length && seen >= marks[next][0]) {
+        if (window.umami && window.umami.track) window.umami.track(marks[next][1]);
+        next++;
+      }
+      if (next >= marks.length) clearInterval(timer);
+    }, 1000);
+  })();
+</script>
 </body>
 </html>
